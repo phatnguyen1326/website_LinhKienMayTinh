@@ -1,4 +1,4 @@
-# 🛒 Kế Hoạch Xây Dựng E-Commerce AI Agent Platform (0đ Architecture)
+# 🛒 Kế Hoạch Xây Dựng E-Commerce AI Agent Platform về linh kiện máy tính (cpu, ram, vga, mainboard, case) (0đ Architecture)
 
 > **Stack chính:** Vue 3 + Nuxt 3 · Tailwind CSS · Java Spring Boot · MongoDB Atlas · Upstash Redis · AI Agents (Gemini API)  
 > **Deploy:** Vercel (Frontend) · Render/Koyeb (Backend) · MongoDB Atlas · Cloudflare CDN  
@@ -48,3 +48,11 @@ ecommerce-ai-portfolio/
 │   └── pom.xml
 │
 └── docker-compose.yml          # Setup MongoDB, Redis chạy local khi dev
+
+## 🛡️ Enterprise Backend Patterns (Điểm Nhấn Kỹ Thuật)
+
+Dự án không chỉ dừng lại ở CRUD cơ bản mà còn áp dụng các pattern thực tế để giải quyết các bài toán hóc búa trong thương mại điện tử:
+
+* **Concurrency Control (Xử lý đồng thời):** Áp dụng **Optimistic Locking** (`@Version` trong Spring Data MongoDB) hoặc **Redis Distributed Lock** để khóa số lượng tồn kho, giải quyết bài toán Race Condition khi có nhiều user cùng mua một món linh kiện (Flash Sale) trong cùng một thời điểm.
+* **Asynchronous Processing (Xử lý bất đồng bộ):** Sử dụng `@Async` của Spring Boot kết hợp với Event-driven architecture để đẩy các tác vụ nặng (như gửi email xác nhận đơn hàng qua Resend) xuống chạy ngầm (Background Task), đảm bảo API Checkout phản hồi với độ trễ (latency) thấp nhất.
+* **API Documentation & Monitoring:** Tích hợp **Swagger (OpenAPI 3.0)** để tự động sinh tài liệu giao tiếp chuẩn mực cho Frontend. Cấu hình **SLF4J/Logback** phân cấp log (Info, Warn, Error) để dễ dàng trace lỗi trên môi trường Cloud.
