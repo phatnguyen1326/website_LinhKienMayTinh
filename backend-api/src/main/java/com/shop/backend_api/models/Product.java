@@ -30,7 +30,6 @@ public class Product {
     private List<String> imageUrls; // Danh sách link ảnh
     private int stock;              // Số lượng tồn kho
     
-    // Trường này rất quan trọng để sau này làm AI Semantic Search
     private List<Double> vectorEmbedding; 
     
     private LocalDateTime createdAt = LocalDateTime.now();
